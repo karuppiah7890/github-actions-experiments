@@ -13,14 +13,12 @@ jobs:
       - name: Install and run AWS CLI
         shell: bash
         run: |
-          aliasrc=/tmp/alias-rcfile
-          echo "shopt -s expand_aliases" > $aliasrc
-          echo "alias aws='docker run --rm -ti -v \$HOME/.aws:/root/.aws -v \$(pwd):/aws public.ecr.aws/aws-cli/aws-cli@sha256:06f95828509d83f5899d373e054ab1ed91dc84b03cf665f755b668cbaf38b822'" >> $aliasrc
-          source $aliasrc
+          function aws() {
+            docker run --rm -ti -v $HOME/.aws:/root/.aws -v $(pwd):/aws public.ecr.aws/aws-cli/aws-cli@sha256:06f95828509d83f5899d373e054ab1ed91dc84b03cf665f755b668cbaf38b822
+          }
           aws --version
       - name: Run AWS CLI
         shell: bash
         run: |
-          source $aliasrc
           aws help
           aws --version
