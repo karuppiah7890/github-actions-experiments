@@ -14,7 +14,7 @@ jobs:
         shell: bash
         run: |
           function aws() {
-            docker run --rm -ti -v $HOME/.aws:/root/.aws -v $(pwd):/aws public.ecr.aws/aws-cli/aws-cli@sha256:06f95828509d83f5899d373e054ab1ed91dc84b03cf665f755b668cbaf38b822
+            docker run --rm -v $HOME/.aws:/root/.aws -v $(pwd):/aws public.ecr.aws/aws-cli/aws-cli@sha256:06f95828509d83f5899d373e054ab1ed91dc84b03cf665f755b668cbaf38b822 ${a}
           }
           aws --version
       - name: Run AWS CLI
